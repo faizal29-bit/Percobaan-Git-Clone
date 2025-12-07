@@ -10,9 +10,9 @@
     />
     <style>
       :root {
-        --glass-bg: rgba(255, 255, 255, 0.7);
-        --glass-border: 1px solid rgba(255, 255, 255, 0.5);
-        --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        --glass-bg: rgba(255, 255, 255, 0.8); /* Diperjelas sedikit */
+        --glass-border: 1px solid rgba(255, 255, 255, 0.6); /* Diperjelas sedikit */
+        --card-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.25); /* Shadow lebih kuat */
         --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         --text-main: #2d3436;
         --text-secondary: #636e72;
@@ -21,11 +21,11 @@
 
       /* Dark Mode Variables */
       body.dark-mode {
-        --glass-bg: rgba(20, 20, 20, 0.8);
-        --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        --glass-bg: rgba(0, 0, 0, 0.7); /* Lebih gelap */
+        --glass-border: 1px solid rgba(255, 255, 255, 0.2);
         --text-main: #dfe6e9;
         --text-secondary: #b2bec3;
-        --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        --card-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.7); /* Shadow lebih gelap */
       }
 
       * {
@@ -33,7 +33,8 @@
         padding: 0;
         box-sizing: border-box;
         font-family: "Poppins", sans-serif;
-        transition: all 0.3s ease;
+        /* Tambahkan transisi untuk semua properti yang bisa dianimasikan */
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       }
 
       body {
@@ -60,8 +61,8 @@
       /* Header Glass */
       header {
         background: var(--glass-bg);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(15px); /* Efek blur ditingkatkan */
+        -webkit-backdrop-filter: blur(15px);
         border-bottom: var(--glass-border);
         padding: 1rem 2rem;
         position: sticky;
@@ -98,17 +99,20 @@
         font-weight: 500;
         cursor: pointer;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Transisi khusus untuk tombol */
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
       }
 
       .user-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-3px); /* Efek hover sedikit ditingkatkan */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.18);
       }
 
       .user-btn.active {
         background: var(--primary-gradient);
         color: white;
-        box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+        box-shadow: 0 4px 15px rgba(118, 75, 162, 0.5); /* Shadow sedikit ditingkatkan */
+        transform: translateY(-1px); /* Tetap sedikit terangkat */
       }
 
       /* Container & Card */
@@ -120,38 +124,41 @@
 
       .biodata-card {
         background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-radius: 20px;
+        backdrop-filter: blur(18px); /* Efek blur card ditingkatkan */
+        -webkit-backdrop-filter: blur(18px);
+        border-radius: 25px; /* Radius sedikit ditingkatkan */
         border: var(--glass-border);
-        padding: 3rem;
+        padding: 3.5rem; /* Padding sedikit ditingkatkan */
         box-shadow: var(--card-shadow);
         text-align: center;
+        /* Transisi card untuk animasi ganti user (opsional) */
+        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
       }
 
       /* Profile Section */
       .profile-img {
-        width: 160px;
-        height: 160px;
+        width: 180px; /* Ukuran gambar ditingkatkan */
+        height: 180px;
         border-radius: 50%;
         object-fit: cover;
-        border: 4px solid white;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        margin-bottom: 1rem;
+        border: 6px solid white; /* Ketebalan border ditingkatkan */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        margin-bottom: 1.5rem;
       }
 
       .profile-name {
-        font-size: 2.2rem;
+        font-size: 2.5rem; /* Ukuran nama ditingkatkan */
         margin-bottom: 0.2rem;
+        font-weight: 700; /* Dibuat lebih tebal */
       }
 
       .profile-role {
         color: var(--accent);
         font-weight: 600;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px; /* Spacing ditingkatkan */
         text-transform: uppercase;
-        font-size: 0.9rem;
-        margin-bottom: 2rem;
+        font-size: 1rem; /* Ukuran peran ditingkatkan */
+        margin-bottom: 2.5rem;
       }
 
       /* Grid Layout */
@@ -163,48 +170,52 @@
       }
 
       .info-group {
-        background: rgba(255, 255, 255, 0.4); /* Semi transparent inner card */
-        padding: 1.5rem;
-        border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.3); /* Transparansi inner card ditingkatkan */
+        padding: 2rem; /* Padding ditingkatkan */
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Tambah shadow kecil */
       }
 
       body.dark-mode .info-group {
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.4); /* Inner card gelap ditingkatkan */
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .info-group h3 {
-        font-size: 1.1rem;
-        margin-bottom: 1.2rem;
+        font-size: 1.2rem; /* Ukuran heading ditingkatkan */
+        margin-bottom: 1.5rem;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         color: var(--accent);
+        font-weight: 700;
       }
 
       .info-item {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        padding-bottom: 8px;
+        margin-bottom: 12px; /* Margin ditingkatkan */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Garis lebih jelas */
+        padding-bottom: 10px;
       }
 
       body.dark-mode .info-item {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .info-label {
         font-weight: 600;
         color: var(--text-main);
-        font-size: 0.9rem;
+        font-size: 1rem; /* Ukuran label ditingkatkan */
       }
 
       .info-value {
         color: var(--text-secondary);
-        font-size: 0.9rem;
+        font-size: 1rem; /* Ukuran nilai ditingkatkan */
         text-align: right;
         max-width: 60%;
+        font-weight: 500;
       }
 
       /* Footer */
@@ -213,16 +224,16 @@
         margin-top: 2rem;
         color: white;
         font-size: 0.9rem;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Shadow footer ditingkatkan */
       }
 
       /* Action Buttons (Dark Mode & Print) */
       .action-btn {
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.3); /* Dibuat sedikit lebih transparan */
         color: white;
       }
       .action-btn:hover {
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.5); /* Hover lebih gelap */
       }
 
       /* Print Style */
@@ -258,8 +269,26 @@
         header {
           flex-direction: column;
         }
+        .biodata-card {
+            padding: 2rem 1.5rem; /* Padding lebih kecil di mobile */
+            border-radius: 15px;
+        }
         .biodata-grid {
           grid-template-columns: 1fr;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+        }
+        .profile-name {
+            font-size: 2rem;
+        }
+        .profile-role {
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .info-group {
+            padding: 1.5rem;
         }
       }
     </style>
@@ -444,23 +473,23 @@
           languages: "ID, EN, Jawa",
         },
         machfudz: {
-          name: "mahfudz Pratama",
+          name: "muhammad machfudz",
           role: "UI/UX Designer",
           img: "https://i.pravatar.cc/150?img=8",
-          birthDate: "05 Jan 2001",
+          birthDate: "14 maret 2005",
           birthPlace: "Semarang",
           gender: "Laki-laki",
           maritalStatus: "Single",
-          education: "D3 DKV",
-          university: "UDINUS",
+          education: "S1 Teknik Informatika",
+          university: " UNISSULA",
           job: "Product Designer",
           company: "Startup Maju",
-          email: "doni@uiux.id",
+          email: "maput@uiux.id",
           phone: "0899-8877-6655",
           address: "Tembalang, Semarang",
           hobbies: "Sketching, Music",
           skills: "Figma, Adobe XD",
-          languages: "ID, EN, Jawa",
+          languages: "ID, EN, Jawa, ngapak, ngolok",
         },
       };
 
