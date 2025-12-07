@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Biodata User</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #1abc9c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        /* Tombol User */
+        .user-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .user-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .user-btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .user-btn.active {
+            background-color: var(--accent);
+            box-shadow: 0 4px 8px rgba(26, 188, 156, 0.3);
+        }
+
+        /* Konten Utama */
+        .container {
+            max-width: 2000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Biodata Card */
+        .biodata-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Profile Header */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--light);
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-role {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: normal;
+        }
+
+        /* Biodata Grid */
+        .biodata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .info-group {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .info-group h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-item {
+            margin-bottom: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--dark);
+            min-width: 120px;
+            margin-right: 5px;
+        }
+
+        .info-value {
+            flex: 1;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .biodata-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-name {
+                font-size: 1.6rem;
+            }
+            
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .user-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .user-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dengan Tombol -->
+    <header>
+        <div class="header-content">
+            <h1>Dashboard Biodata</h1>
+            <div class="user-buttons">
+                <button class="user-btn active" id="btn-faizal">
+                    👤 Biodata Faizal
+                </button>
+                <button class="user-btn" id="btn-tono">
+                    👤 Biodata Tono
+                </button>
+                <button class="user-btn" id="btn-doni">
+                    👤 Biodata Doni
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Biodata -->
+    <div class="container">
+        <div class="biodata-card">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <img id="profile-img" src="https://i.pravatar.cc/150?img=1" alt="Foto Profil" class="profile-img">
+                <h2 id="profile-name" class="profile-name">Faizal Imam Safangat</h2>
+                <p id="profile-role" class="profile-role">Software Engineer</p>
+            </div>
+
+            <!-- Biodata Grid -->
+            <div class="biodata-grid">
+                <!-- Informasi Pribadi -->
+                <div class="info-group">
+                    <h3>📋 Informasi Pribadi</h3>
+                    <div class="info-item">
+                        <span class="info-label">Tanggal Lahir:</span>
+                        <span id="birth-date" class="info-value">29 November 2004</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempat Lahir:</span>
+                        <span id="birth-place" class="info-value">Banyumas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Jenis Kelamin:</span>
+                        <span id="gender" class="info-value">Laki-laki</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Status:</span>
+                        <span id="marital-status" class="info-value">Belum Menikah</span>
+                    </div>
+                </div>
+
+                <!-- Pendidikan & Pekerjaan -->
+                <div class="info-group">
+                    <h3>🎓 Pendidikan & Pekerjaan</h3>
+                    <div class="info-item">
+                        <span class="info-label">Pendidikan:</span>
+                        <span id="education" class="info-value">S1 Teknik Informatika</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Universitas:</span>
+                        <span id="university" class="info-value">Universitas Islam Sultan Agung</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Pekerjaan:</span>
+                        <span id="job" class="info-value">Software Engineer</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Perusahaan:</span>
+                        <span id="company" class="info-value">TechCorp Indonesia</span>
+                    </div>
+                </div>
+
+                <!-- Kontak -->
+                <div class="info-group">
+                    <h3>📞 Kontak</h3>
+                    <div class="info-item">
+                        <span class="info-label">Email:</span>
+                        <span id="email" class="info-value">faizalsafaat46@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Telepon:</span>
+                        <span id="phone" class="info-value">085888675578</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Alamat:</span>
+                        <span id="address" class="info-value">Kalibagor, Banyumas</span>
+                    </div>
+                </div>
+
+                <!-- Hobi & Keahlian -->
+                <div class="info-group">
+                    <h3>⚡ Hobi & Keahlian</h3>
+                    <div class="info-item">
+                        <span class="info-label">Hobi:</span>
+                        <span id="hobbies" class="info-value">Programming, Gaming, Mancing</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Keahlian:</span>
+                        <span id="skills" class="info-value">JavaScript, React, Node.js</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Bahasa:</span>
+                        <span id="languages" class="info-value">Indonesia, Inggris, Ngapak</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2023 Dashboard Biodata </p>
+    </footer>
+
+    <script>
+        // Data untuk kedua user
+        const users = {
+            faizal: {
+                name: "Faizal Imam Safangat",
+                role: "Software Engineer",
+                img: "faizal.png",
+                birthDate: "29 November 2004",
+                birthPlace: "Banyumas",
+                gender: "Laki-laki",
+                maritalStatus: "Belum Menikah",
+                education: "S1 Teknik Informatika",
+                university: "Universitas Islam Sultan Agung",
+                job: "Software Engineer",
+                company: "TechCorp Indonesia",
+                email: "faizalsafaat46@gmail.com",
+                phone: "085888675578",
+                address: "kalibagor, Banyumas",
+                hobbies: "Programming, Gaming, Mancing",
+                skills: "JavaScript, React, Node.js, UI/UX Design",
+                languages: "Indonesia, Inggris, Jawa Ngapak"
+            },
+            tono: {
+                name: "Tono Wijaya",
+                role: "Digital Marketing Specialist",
+                img: "https://i.pravatar.cc/150?img=2",
+                birthDate: "22 Maret 1988",
+                birthPlace: "Bandung",
+                gender: "Laki-laki",
+                maritalStatus: "Menikah",
+                education: "S1 Ilmu Komunikasi",
+                university: "Universitas Padjadjaran",
+                job: "Digital Marketing Specialist",
+                company: "Creative Media Agency",
+                email: "tono@example.com",
+                phone: "+62 823-9876-5432",
+                address: "Jl. Asia Afrika No. 45, Bandung",
+                hobbies: "Fotografi, Traveling, Menulis",
+                skills: "SEO, Social Media Marketing, Content Creation",
+                languages: "Indonesia, Inggris, Sunda"
+            },
+            doni: {
+                name: "Doni Wijaya",
+                role: "Digital Marketing Specialist",
+                img: "https://i.pravatar.cc/150?img=2",
+                birthDate: "22 Maret 1988",
+                birthPlace: "Bandung",
+                gender: "Laki-laki",
+                maritalStatus: "Menikah",
+                education: "S1 Ilmu Komunikasi",
+                university: "Universitas Padjadjaran",
+                job: "Digital Marketing Specialist",
+                company: "Creative Media Agency",
+                email: "tono@example.com",
+                phone: "+62 823-9876-5432",
+                address: "Jl. Asia Afrika No. 45, Bandung",
+                hobbies: "Fotografi, Traveling, Menulis",
+                skills: "SEO, Social Media Marketing, Content Creation",
+                languages: "Indonesia, Inggris, Sunda"
+            }
+        };
+
+        // Elemen DOM
+        const btnFaizal = document.getElementById('btn-faizal');
+        const btnTono = document.getElementById('btn-tono');
+        const btnDoni = document.getElementById('btn-doni');
+        
+        // Fungsi untuk update biodata
+        function updateBiodata(user) {
+            const data = users[user];
+            
+            // Update header
+            document.getElementById('profile-img').src = data.img;
+            document.getElementById('profile-name').textContent = data.name;
+            document.getElementById('profile-role').textContent = data.role;
+            
+            // Update informasi pribadi
+            document.getElementById('birth-date').textContent = data.birthDate;
+            document.getElementById('birth-place').textContent = data.birthPlace;
+            document.getElementById('gender').textContent = data.gender;
+            document.getElementById('marital-status').textContent = data.maritalStatus;
+            
+            // Update pendidikan & pekerjaan
+            document.getElementById('education').textContent = data.education;
+            document.getElementById('university').textContent = data.university;
+            document.getElementById('job').textContent = data.job;
+            document.getElementById('company').textContent = data.company;
+            
+            // Update kontak
+            document.getElementById('email').textContent = data.email;
+            document.getElementById('phone').textContent = data.phone;
+            document.getElementById('address').textContent = data.address;
+            
+            // Update hobi & keahlian
+            document.getElementById('hobbies').textContent = data.hobbies;
+            document.getElementById('skills').textContent = data.skills;
+            document.getElementById('languages').textContent = data.languages;
+        }
+
+        // Fungsi untuk update tombol aktif
+        function updateActiveButton(activeUser) {
+            // Reset semua tombol
+            btnFaizal.classList.remove('active');
+            btnTono.classList.remove('active');
+            btnDoni.classList.remove('active');
+            
+            // Set tombol aktif
+            if (activeUser === 'faizal') {
+                btnFaizal.classList.add('active');
+            } else if(activeUser === 'tono'){
+                btnTono.classList.add('active');
+            }else{
+                btnDoni.classList.add('active');
+            }
+        }
+
+        // Event listeners untuk tombol
+        btnFaizal.addEventListener('click', function() {
+            updateBiodata('faizal');
+            updateActiveButton('faizal');
+        });
+
+        btnTono.addEventListener('click', function() {
+            updateBiodata('tono');
+            updateActiveButton('tono');
+        });
+        btnDoni.addEventListener('click', function() {
+            updateBiodata('doni');
+            updateActiveButton('doni');
+        });
+
+        // Inisialisasi dengan data Faizal
+        updateBiodata('faizal');
+        updateActiveButton('faizal');
+    </script>
+</body>
+</html>
